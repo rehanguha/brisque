@@ -12,13 +12,14 @@ import skimage.io
 import skimage.transform
 from libsvm import svmutil
 import os
+from brisque.models import MODEL_PATH
 
 class BRISQUE:
     def __init__(self, image_path, url=False):
         self.image = image_path
         self.url = url
-        self.model = os.path.join(os.getcwd(),"models/svm.txt")
-        self.norm = os.path.join(os.getcwd(),"models/normalize.pickle")
+        self.model = os.path.join(MODEL_PATH,"svm.txt")
+        self.norm = os.path.join(MODEL_PATH,"normalize.pickle")
     
     def load_image(self):
         if self.url:
