@@ -11,11 +11,14 @@ import scipy.optimize as optimize
 import skimage.io
 import skimage.transform
 from libsvm import svmutil
+import os
 
 class BRISQUE:
     def __init__(self, image_path, url=False):
         self.image = image_path
         self.url = url
+        self.model = os.path.join(os.getcwd(),"models/svm.txt")
+        self.norm = os.path.join(os.getcwd(),"models/normalize.pickle")
     
     def load_image(self):
         if self.url:
@@ -157,7 +160,7 @@ class BRISQUE:
         return np.array(flatten_features, dtype=object)
     
     def scale_features(self, features):
-        with open('models/normalize.pickle', 'rb') as handle:
+        with open(self.norm, 'rb') as handle:
             scale_params = pickle.load(handle)
 
         min_ = np.array(scale_params['min_'], dtype=object)
@@ -166,7 +169,7 @@ class BRISQUE:
         return -1 + (2.0 / (max_ - min_) * (features - min_))
 
     def calculate_image_quality_score(self, brisque_features):
-        model = svmutil.svm_load_model('models/svm.txt')
+        model = svmutil.svm_load_model(self.model)
         scaled_brisque_features = self.scale_features(brisque_features)
 
         x, idx = svmutil.gen_svm_nodearray(
