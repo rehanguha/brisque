@@ -14,7 +14,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/rehanguha/brisque",
-    package_dir={'': 'interspace'},
+    package_dir={'': 'brisque'},
     packages=setuptools.find_packages(),
     keywords = ['quality', 'ml', 'image', 'maths', 'vectors', 'space'],
     classifiers=[
