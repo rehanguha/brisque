@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="brisque", # Replace with your own username
-    version="0.0.3",
+    version="0.0.4",
     author="Rehan Guha",
     py_modules=["brisque"],
     license='mit',
