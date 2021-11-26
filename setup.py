@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="brisque", # Replace with your own username
-    version="0.0.6",
+    version="0.0.7",
     author="Rehan Guha",
     py_modules=["brisque"],
     license='mit',
@@ -15,7 +15,6 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/rehanguha/brisque",
     package_dir={'brisque': 'brisque'},
-    package_data={'brisque': ['*.txt', '*.py', '*.pickle', '*.*']},
     packages=setuptools.find_packages(),
     keywords = ['quality', 'svm', 'image', 'maths'],
     classifiers=[
