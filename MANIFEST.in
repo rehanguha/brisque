@@ -1,1 +1,1 @@
-include *.txt *.pickle *.py
+global-include *.txt *.pickle *.py
