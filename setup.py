@@ -16,6 +16,7 @@ setuptools.setup(
     url="https://github.com/rehanguha/brisque",
     package_dir={'brisque': 'brisque'},
     packages=setuptools.find_packages(),
+    include_package_data=True,
     keywords = ['quality', 'svm', 'image', 'maths'],
     classifiers=[
         "Operating System :: OS Independent",
