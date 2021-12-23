@@ -38,7 +38,7 @@ class BRISQUE:
         downscale_brisque_features = self.calculate_brisque_features(downscaled_image, kernel_size=7, sigma=7/6)
         brisque_features = np.concatenate((brisque_features, downscale_brisque_features))
 
-        print(self.calculate_image_quality_score(brisque_features))
+        return self.calculate_image_quality_score(brisque_features)
     
     def normalize_kernel(self, kernel):
         return kernel / np.sum(kernel)
