@@ -1,11 +1,11 @@
 import setuptools
-import brisque
+from brisque import __version__
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="brisque", # Replace with your own username
-    version=brisque.__version__,
+    version=__version__,
     author="Rehan Guha",
     py_modules=["brisque"],
     license='mit',
