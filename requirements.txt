@@ -8,7 +8,7 @@ networkx==2.6.3
 numpy==1.21.4
 opencv-python==4.5.4.60
 packaging==21.3
-Pillow==8.4.0
+Pillow==9.0.1
 pyparsing==3.0.6
 python-dateutil==2.8.2
 PyWavelets==1.2.0
