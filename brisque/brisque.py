@@ -28,8 +28,15 @@ class BRISQUE:
             image = self.image   
         return skimage.io.imread(image, plugin='pil')
 
+    def remove_alpha_channel(self, original_image):
+        image = np.array(original_image)
+        if len(image.shape) == 3 and image.shape[2] == 4:
+            image = image[:,:,:3]
+        return image
+
     def score(self):
         image = self.load_image()
+        image = self.remove_alpha_channel(image)
         gray_image = skimage.color.rgb2gray(image)
         mscn_coefficients = self.calculate_mscn_coefficients(gray_image, 7, 7/6)
         coefficients = self.calculate_pair_product_coefficients(mscn_coefficients)
