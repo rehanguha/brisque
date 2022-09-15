@@ -2,7 +2,7 @@
 
 BRISQUE is a no-reference image quality score.
 
-A good place to know how BRISQUE works : ![LearnOpenCV](https://learnopencv.com/image-quality-assessment-brisque/)
+A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/image-quality-assessment-brisque/)
 
 
 ## Installation
