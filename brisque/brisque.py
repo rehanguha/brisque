@@ -15,6 +15,10 @@ from brisque.models import MODEL_PATH
 
 class BRISQUE:
     def __init__(self, url=False):
+        """
+        Arguments:
+        url: It can be `False` or the URL of the the image.
+        """
 
         self.url = url
         self.model = os.path.join(MODEL_PATH, "svm.txt")
@@ -27,8 +31,7 @@ class BRISQUE:
 
     def load_image(self, img):
         if self.url:
-            self.image = img
-            image = request.urlopen(self.image)
+            image = request.urlopen(self.url)
             return skimage.io.imread(image, plugin='pil')
         else:
             return img
