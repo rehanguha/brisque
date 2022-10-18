@@ -17,16 +17,16 @@ pip install brisque
 ```python
 from brisque import BRISQUE
 
-obj = BRISQUE("<Location of the Image>", url=False)
-obj.score()
+obj = BRISQUE(url=False)
+obj.score("<Ndarray of the Image>")
 ```
 
 2. Trying to perform Image Quality Assessment on **web images** 
 ```python
 from brisque import BRISQUE
 
-obj = BRISQUE("<URL for the Image>", url=True)
-obj.score()
+obj = BRISQUE(url=True)
+obj.score("<URL for the Image>")
 ```
 
 ### Example
