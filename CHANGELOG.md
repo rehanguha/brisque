@@ -1,0 +1,6 @@
+- 0.0.15
+  - #9
+    - Removed direct image loading instead made it more generic using NdArray
+    - Moved the loading of the model to init method for faster score processing
+- 0.0.14
+  - PyTest and Doc Update

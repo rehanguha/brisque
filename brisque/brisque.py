@@ -9,7 +9,6 @@ import scipy.ndimage.filters as filters
 import scipy.special as special
 import scipy.optimize as optimize
 import skimage.io
-import skimage.transform
 from libsvm import svmutil
 import os
 from brisque.models import MODEL_PATH
