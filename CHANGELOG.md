@@ -1,6 +1,13 @@
-- 0.0.15
-  - #9
+- v0.0.16
+  - [#12](https://github.com/rehanguha/brisque/issues/12)
+    - Updated pip package: `libsvm` to `libsvm-official`
+  - Added a pytest for local image
+  - updated `README.md`
+- v0.0.15
+  - Just for compatibility I have added reading the image as well.
+- v0.0.15
+  - [#9](https://github.com/rehanguha/brisque/pull/9)
     - Removed direct image loading instead made it more generic using NdArray
     - Moved the loading of the model to init method for faster score processing
-- 0.0.14
+- v0.0.14
   - PyTest and Doc Update

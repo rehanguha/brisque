@@ -31,15 +31,40 @@ obj.score("<URL for the Image>")
 
 ### Example
 
+#### Local Image
+
+- Input
+```python
+from brisque import BRISQUE
+import numpy as np
+from PIL import Image
+
+img_path = "brisque/tests/sample-image.jpg"
+img = Image.open(img_path)
+ndarray = np.asarray(img)
+
+obj = BRISQUE(url=False)
+obj.score(img=ndarray)
+```
+- Output
+```
+34.84883848208594
+```
+
+#### URL
+
 - Input
 ```python
 from brisque import BRISQUE
 
-obj = BRISQUE("https://www.mathworks.com/help/examples/images/win64/CalculateBRISQUEScoreUsingCustomFeatureModelExample_01.png", 
-        url=True)
-obj.score()
+URL = "https://www.mathworks.com/help/examples/images/win64/CalculateBRISQUEScoreUsingCustomFeatureModelExample_01.png"
+
+obj = BRISQUE(url=True)
+obj.score(URL)
 ```
 - Output
 ```
-74.41910327611319
+71.73427549219988
 ```
+
+

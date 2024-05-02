@@ -1,6 +1,5 @@
 from brisque import BRISQUE
 import numpy as np
-import pytest
 from PIL import Image
 
 def test_validate_url_score():
