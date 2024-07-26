@@ -1,7 +1,26 @@
 import setuptools
+from typing import List, Tuple
+from pkg_resources import DistributionNotFound, get_distribution
+
 from brisque import __version__
+
+INSTALL_REQUIRES = [
+    "numpy",
+    "scikit-image",
+    "scipy",
+    "libsvm-official",
+]
+
+EXTRA_REQUIRES = {
+    "opencv-python": ["opencv-python"],
+    "opencv-python-headless": ["opencv-python-headless"],
+    "opencv-contrib-python": ["opencv-contrib-python"],
+    "opencv-contrib-python-headless": ["opencv-contrib-python-headless"],
+}
+
 with open("README.md", "r") as fh:
-    long_description = fh.read()
+   long_description = fh.read()
+
 
 setuptools.setup(
     name="brisque", # Replace with your own username
@@ -28,5 +47,6 @@ setuptools.setup(
         'Intended Audience :: Developers',
     ],
     python_requires='>=2.7',
-    install_requires=['numpy', 'scikit-image', 'scipy', 'opencv-python', 'libsvm-official'],
+    install_requires=INSTALL_REQUIRES,
+    extras_require=EXTRA_REQUIRES,
 )

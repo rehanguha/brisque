@@ -8,7 +8,13 @@ A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/i
 ## Installation
 
 ```bash
-pip install brisque
+# You will need to specify which version of OpenCV you intend to use with BRISQUE:
+#   * opencv-python
+#   * opencv-python-headless
+#   * opencv-contrib-python
+#   * opencv-contrib-python-headless
+# You can do this with `pip install brisque[<YOUR CHOSEN VERSION HERE>]`, e.g.
+pip install [opencv-python-headless]
 ```
 
 ## Usage
