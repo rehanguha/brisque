@@ -1,4 +1,4 @@
-# Blind/Referenceless Image Spatial Quality Evaluator (BRISQUE) 
+# Blind/Referenceless Image Spatial Quality Evaluator (BRISQUE)
 
 BRISQUE is a no-reference image quality score.
 
@@ -8,22 +8,28 @@ A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/i
 ## Installation
 
 ```bash
-pip install brisque
+# You will need to specify which version of OpenCV you intend to use with BRISQUE:
+#   * opencv-python
+#   * opencv-python-headless
+#   * opencv-contrib-python
+#   * opencv-contrib-python-headless
+# You can do this with `pip install brisque[<YOUR CHOSEN VERSION HERE>]`, e.g.
+pip install [opencv-python-headless]
 ```
 
 ## Usage
 
-1. Trying to perform Image Quality Assessment on **local images** 
+1. Trying to perform Image Quality Assessment on **local images**
 ```python
-from brisque import BRISQUE
+from brisque.brisque import BRISQUE
 
 obj = BRISQUE(url=False)
 obj.score("<Ndarray of the Image>")
 ```
 
-2. Trying to perform Image Quality Assessment on **web images** 
+2. Trying to perform Image Quality Assessment on **web images**
 ```python
-from brisque import BRISQUE
+from brisque.brisque import BRISQUE
 
 obj = BRISQUE(url=True)
 obj.score("<URL for the Image>")
@@ -35,7 +41,7 @@ obj.score("<URL for the Image>")
 
 - Input
 ```python
-from brisque import BRISQUE
+from brisque.brisque import BRISQUE
 import numpy as np
 from PIL import Image
 
@@ -55,7 +61,7 @@ obj.score(img=ndarray)
 
 - Input
 ```python
-from brisque import BRISQUE
+from brisque.brisque import BRISQUE
 
 URL = "https://www.mathworks.com/help/examples/images/win64/CalculateBRISQUEScoreUsingCustomFeatureModelExample_01.png"
 
@@ -66,5 +72,3 @@ obj.score(URL)
 ```
 71.73427549219988
 ```
-
-
