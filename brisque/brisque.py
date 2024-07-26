@@ -11,11 +11,12 @@ import scipy.optimize as optimize
 import skimage.io
 from libsvm import svmutil
 import os
+import warnings
 from brisque.models import MODEL_PATH
+
 
 class BRISQUE:
     def __init__(self, url=False):
-
         self.url = url
         self.model = os.path.join(MODEL_PATH, "svm.txt")
         self.norm = os.path.join(MODEL_PATH, "normalize.pickle")
@@ -179,9 +180,14 @@ class BRISQUE:
     def calculate_image_quality_score(self, brisque_features):
         scaled_brisque_features = self.scale_features(brisque_features)
 
-        x, idx = svmutil.gen_svm_nodearray(
-            scaled_brisque_features,
-            isKernel=(self.model.param.kernel_type == svmutil.PRECOMPUTED))
+        with warnings.catch_warnings():
+            # LibSVM is using a deprecated method to reshape an array, which throws a warning.
+            # This is a library issue and can be ignored.
+            warnings.filterwarnings("ignore", category=DeprecationWarning, module="libsvm")
+
+            x, idx = svmutil.gen_svm_nodearray(
+                scaled_brisque_features,
+                isKernel=(self.model.param.kernel_type == svmutil.PRECOMPUTED))
 
         nr_classifier = 1
         prob_estimates = (svmutil.c_double * nr_classifier)()
