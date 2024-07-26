@@ -1,4 +1,4 @@
-from brisque import BRISQUE
+from brisque.brisque import BRISQUE
 import numpy as np
 from PIL import Image
 
