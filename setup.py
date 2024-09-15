@@ -8,7 +8,7 @@ setuptools.setup(
     version=__version__,
     author="Rehan Guha",
     py_modules=["brisque"],
-    license='mit',
+    license='Apache-2.0',
     author_email="rehanguha29@gmail.com",
     description="Image Quality",
     long_description=long_description,
