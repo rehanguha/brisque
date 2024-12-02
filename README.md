@@ -1,5 +1,8 @@
 # Blind/Referenceless Image Spatial Quality Evaluator (BRISQUE) 
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11104461.svg)](https://doi.org/10.5281/zenodo.11104461)
+
+
 BRISQUE is a no-reference image quality score.
 
 A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/image-quality-assessment-brisque/)
