@@ -1,7 +1,7 @@
 import cv2
 import collections
 from itertools import chain
-import urllib.request as request
+# import urllib.request as request
 import pickle
 import numpy as np
 import scipy.signal as signal
@@ -10,6 +10,7 @@ import scipy.special as special
 import scipy.optimize as optimize
 import skimage.io
 from libsvm import svmutil
+import requests
 import os
 from brisque.models import MODEL_PATH
 
@@ -27,8 +28,8 @@ class BRISQUE:
 
     def load_image(self, img):
         if self.url:
-            self.image = img
-            image = request.urlopen(self.image)
+            response = requests.get(img)
+            image = response.content
             return skimage.io.imread(image, plugin='pil')
         else:
             return img
