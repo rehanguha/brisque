@@ -28,5 +28,5 @@ setuptools.setup(
         'Intended Audience :: Developers',
     ],
     python_requires='>=2.7',
-    install_requires=['numpy', 'scikit-image', 'scipy', 'opencv-python', 'libsvm-official'],
+    install_requires=['numpy', 'scikit-image', 'scipy', 'opencv-python', 'libsvm-official','requests'],
 )
