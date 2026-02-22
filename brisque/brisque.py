@@ -9,21 +9,68 @@ import scipy.ndimage.filters as filters
 import scipy.special as special
 import scipy.optimize as optimize
 import skimage.io
+import skimage.color
 from libsvm import svmutil
 import requests
 import os
 from brisque.models import MODEL_PATH
 
+
 class BRISQUE:
-    def __init__(self, url=False):
-
+    """
+    Blind/Referenceless Image Spatial Quality Evaluator.
+    
+    BRISQUE is a no-reference image quality assessment algorithm that computes
+    a quality score for images without requiring a reference image.
+    
+    Lower scores indicate better quality. Typical scores range from 0-100,
+    where 0 is perfect quality and higher values indicate more distortion.
+    
+    Args:
+        url (bool): If True, the score() method accepts URLs. If False, 
+                    it accepts numpy arrays. Default: False.
+        model_path (dict, optional): Custom model paths. Should contain:
+            - 'svm': Path to SVM model file (.txt)
+            - 'normalize': Path to normalization parameters (.pickle)
+            If None, uses the default pre-trained model.
+    
+    Example:
+        >>> from brisque import BRISQUE
+        >>> import numpy as np
+        >>> from PIL import Image
+        >>> 
+        >>> # Using default model
+        >>> obj = BRISQUE(url=False)
+        >>> img = np.array(Image.open("image.jpg"))
+        >>> score = obj.score(img)
+        >>> 
+        >>> # Using custom trained model
+        >>> obj = BRISQUE(url=False, model_path={
+        ...     "svm": "custom_svm.txt",
+        ...     "normalize": "custom_normalize.pickle"
+        ... })
+        >>> score = obj.score(img)
+    """
+    
+    def __init__(self, url=False, model_path=None):
+        """Initialize BRISQUE with optional custom model."""
         self.url = url
-        self.model = os.path.join(MODEL_PATH, "svm.txt")
-        self.norm = os.path.join(MODEL_PATH, "normalize.pickle")
+        
+        # Use default model if no custom path provided (backward compatible)
+        if model_path is None:
+            svm_path = os.path.join(MODEL_PATH, "svm.txt")
+            norm_path = os.path.join(MODEL_PATH, "normalize.pickle")
+        else:
+            if not isinstance(model_path, dict):
+                raise ValueError("model_path must be a dict with 'svm' and 'normalize' keys")
+            if 'svm' not in model_path or 'normalize' not in model_path:
+                raise ValueError("model_path must contain 'svm' and 'normalize' keys")
+            svm_path = model_path['svm']
+            norm_path = model_path['normalize']
 
-        # Load in model
-        self.model = svmutil.svm_load_model(self.model)
-        with open(self.norm, 'rb') as f:
+        # Load model
+        self.model = svmutil.svm_load_model(svm_path)
+        with open(norm_path, 'rb') as f:
             self.scale_params = pickle.load(f)
 
     def load_image(self, img):
@@ -182,7 +229,7 @@ class BRISQUE:
 
         x, idx = svmutil.gen_svm_nodearray(
             scaled_brisque_features,
-            isKernel=(self.model.param.kernel_type == svmutil.kernel_names.PRECOMPUTED))
+            isKernel=False)
 
         nr_classifier = 1
         prob_estimates = (svmutil.c_double * nr_classifier)()
