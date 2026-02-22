@@ -2,11 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11104461.svg)](https://doi.org/10.5281/zenodo.11104461)
 
-
-BRISQUE is a no-reference image quality score.
-
-A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/image-quality-assessment-brisque/)
-
+# BRISQUE is a no-reference image quality score.
 
 ## 🆕 What's New in v0.2.0
 
@@ -476,3 +472,7 @@ If you use this package in your research, please cite:
 ## License
 
 Apache-2.0
+
+ ---
+
+A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/image-quality-assessment-brisque/)
