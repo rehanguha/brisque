@@ -14,10 +14,16 @@ import cv2
 import scipy.signal as signal
 import scipy.special as special
 import scipy.optimize as optimize
+import scipy
 from libsvm import svmutil
 from PIL import Image
 
 from brisque.models import MODEL_PATH
+
+# Workaround for libsvm compatibility with newer scipy versions
+# libsvm uses scipy.ndarray which was removed in scipy 1.8+
+if not hasattr(scipy, 'ndarray'):
+    scipy.ndarray = np.ndarray
 
 
 class BRISQUETrainer:

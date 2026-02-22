@@ -15,6 +15,12 @@ import requests
 import os
 from brisque.models import MODEL_PATH
 
+# Workaround for libsvm compatibility with newer scipy versions
+# libsvm uses scipy.ndarray which was removed in scipy 1.8+
+import scipy
+if not hasattr(scipy, 'ndarray'):
+    scipy.ndarray = np.ndarray
+
 
 class BRISQUE:
     """
@@ -221,14 +227,23 @@ class BRISQUE:
     def scale_features(self, features):
         min_ = np.array(self.scale_params['min_'], dtype=object)
         max_ = np.array(self.scale_params['max_'], dtype=object)
+        
+        # Convert features to flat float array for proper scaling
+        features_flat = np.array([float(f) for f in features], dtype=np.float64)
+        min_flat = np.array([float(m) for m in min_], dtype=np.float64)
+        max_flat = np.array([float(m) for m in max_], dtype=np.float64)
 
-        return -1 + (2.0 / (max_ - min_) * (features - min_))
+        return -1 + (2.0 / (max_flat - min_flat) * (features_flat - min_flat))
 
     def calculate_image_quality_score(self, brisque_features):
         scaled_brisque_features = self.scale_features(brisque_features)
+        
+        # Convert to pure Python list of floats to avoid scipy.ndarray compatibility issues in libsvm
+        # libsvm checks isinstance(xi, scipy.ndarray) which fails with newer scipy versions
+        feature_list = [float(f) for f in scaled_brisque_features]
 
         x, idx = svmutil.gen_svm_nodearray(
-            scaled_brisque_features,
+            feature_list,
             isKernel=False)
 
         nr_classifier = 1
