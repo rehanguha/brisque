@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-02-22
+
+### Changed
+- **Flexible OpenCV dependencies** - OpenCV is no longer a hard dependency
+  - Users can now choose their preferred OpenCV variant:
+    - `pip install brisque[opencv-python]` - Desktop applications with GUI
+    - `pip install brisque[opencv-python-headless]` - Servers/Docker (recommended)
+    - `pip install brisque[opencv-contrib-python]` - Desktop with extra modules
+    - `pip install brisque[opencv-contrib-python-headless]` - Servers with extra modules
+  - Users with existing OpenCV installations can install brisque without conflicts
+  - Helpful error message when OpenCV is missing with installation instructions
+
+### Removed
+- **requirements.txt** - Replaced by `requirements-dev.txt` for development only
+  - Users should rely on `setup.py` for package installation
+  - `requirements-dev.txt` contains only development dependencies (pytest, black, etc.)
+
+### Fixed
+- Improved build configuration in `pyproject.toml` (removed runtime dependencies from build-system)
+- Updated minimum Python version requirement to 3.7+
+- Updated classifiers to reflect current Python version support (3.7-3.12)
+
+### Migration Guide
+- **From v0.1.x**: No code changes required. Your existing code will work.
+  - If upgrading: `pip install --upgrade brisque` (your OpenCV will be detected)
+  - For new installs: `pip install brisque[opencv-python-headless]` (or your preferred variant)
+
 ## [0.1.0] - 2026-02-22
 
 ### Added

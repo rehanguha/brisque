@@ -1,0 +1,18 @@
+# Development dependencies for BRISQUE
+# Install with: pip install -r requirements-dev.txt
+
+# Testing
+pytest>=8.0
+pytest-cov>=4.0
+
+# Development tools
+black>=23.0
+flake8>=6.0
+mypy>=1.0
+
+# Documentation dependencies (optional)
+# sphinx>=5.0
+# sphinx-rtd-theme>=1.0
+
+# Image handling for tests
+pillow>=10.0

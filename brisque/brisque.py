@@ -1,4 +1,18 @@
-import cv2
+try:
+    import cv2
+except ImportError as e:
+    raise ImportError(
+        "OpenCV is required for BRISQUE. Install it with one of:\n"
+        "  pip install brisque[opencv-python]\n"
+        "  pip install brisque[opencv-python-headless]\n"
+        "  pip install brisque[opencv-contrib-python]\n"
+        "  pip install brisque[opencv-contrib-python-headless]\n"
+        "\n"
+        "Or install OpenCV separately:\n"
+        "  pip install opencv-python-headless\n"
+        "  pip install brisque"
+    ) from e
+
 import collections
 from itertools import chain
 # import urllib.request as request

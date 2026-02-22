@@ -8,11 +8,102 @@ BRISQUE is a no-reference image quality score.
 A good place to know how BRISQUE works : [LearnOpenCV](https://learnopencv.com/image-quality-assessment-brisque/)
 
 
+## 🆕 What's New in v0.2.0
+
+### Flexible OpenCV Dependencies
+
+Starting with v0.2.0, BRISQUE no longer forces a specific OpenCV variant. This allows you to use whichever OpenCV package best suits your environment.
+
+| OpenCV Variant | Best For |
+|----------------|----------|
+| `opencv-python` | Desktop applications with GUI support |
+| `opencv-python-headless` | Servers, Docker, CI/CD (no GUI) |
+| `opencv-contrib-python` | Desktop with extra OpenCV modules |
+| `opencv-contrib-python-headless` | Servers with extra modules |
+
+**Why this change?**
+- OpenCV variants are mutually exclusive - installing one removes others
+- Previous versions required `opencv-python`, causing conflicts for users with different variants
+- Server/headless environments don't need GUI dependencies from `opencv-python`
+
+### Installation Options
+
+**Option 1: Install with OpenCV (Recommended for new users)**
+```bash
+pip install brisque[opencv-python]              # Desktop applications
+pip install brisque[opencv-python-headless]     # Servers / Docker (recommended)
+pip install brisque[opencv-contrib-python]      # With extra OpenCV modules
+pip install brisque[opencv-contrib-python-headless]  # Servers with extra modules
+```
+
+**Option 2: Use existing OpenCV installation**
+```bash
+# If you already have OpenCV installed
+pip install opencv-python-headless   # or any variant you prefer
+pip install brisque                  # will use your existing OpenCV
+```
+
+**Option 3: Install OpenCV separately (for Docker/corporate environments)**
+```bash
+# In your Dockerfile or controlled environment
+pip install opencv-python-headless
+pip install brisque  # Uses the pre-installed OpenCV
+```
+
+> ⚠️ **Note**: BRISQUE requires OpenCV to function. If you install brisque without OpenCV, you'll get a helpful error message with installation instructions.
+
+### Migration from v0.1.x
+
+If you're upgrading from v0.1.x or earlier:
+
+**Scenario A: Standard desktop usage (no changes needed)**
+```bash
+# Your existing OpenCV will be detected and used
+pip install --upgrade brisque
+```
+
+**Scenario B: Clean install or server environment**
+```bash
+# Uninstall old version
+pip uninstall brisque
+
+# Install with your preferred OpenCV variant
+pip install brisque[opencv-python-headless]  # Recommended for servers
+```
+
+**Scenario C: Docker/CI environments**
+```dockerfile
+# In your Dockerfile
+RUN pip install opencv-python-headless
+RUN pip install brisque
+```
+
+**What changed:**
+- v0.1.x: `pip install brisque` automatically installed `opencv-python`
+- v0.2.0: OpenCV is no longer auto-installed - you choose your variant
+
+**Code compatibility:** No changes needed! Your existing code continues to work:
+```python
+from brisque import BRISQUE  # Still works exactly the same
+obj = BRISQUE(url=False)
+score = obj.score(image)
+```
+
+---
+
+
 ## Installation
 
+**Quick Start:**
 ```bash
-pip install brisque
+# For servers/Docker (recommended):
+pip install brisque[opencv-python-headless]
+
+# For desktop applications:
+pip install brisque[opencv-python]
 ```
+
+**See the [Installation Options](#installation-options) section above for more details.**
 
 ## Usage
 
