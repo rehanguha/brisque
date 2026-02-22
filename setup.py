@@ -1,5 +1,10 @@
 import setuptools
-from brisque import __version__
+import re
+
+# Read version without importing the package (avoids circular import during build)
+with open("brisque/__init__.py") as f:
+    version_match = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE)
+    __version__ = version_match.group(1) if version_match else "0.0.0"
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

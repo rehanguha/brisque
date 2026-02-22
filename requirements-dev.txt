@@ -16,3 +16,4 @@ mypy>=1.0
 
 # Image handling for tests
 pillow>=10.0
+opencv-python-headless>=4.5
